@@ -195,7 +195,7 @@ class WESUPConfig(BaseConfig):
 
     # Training configurations.
     batch_size = 1
-    epochs = 300
+    epochs = 3
 
 
 class WESUP(nn.Module):
