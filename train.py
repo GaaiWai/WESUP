@@ -12,7 +12,7 @@ from utils.metrics import accuracy
 from utils.metrics import dice
 
 
-def fit(dataset_path, model='wesup', **kwargs):
+def fit(dataset_path, model='mild', **kwargs):
     # Initialize logger.
     logger = logging.getLogger('Train')
     logger.setLevel(logging.DEBUG)
