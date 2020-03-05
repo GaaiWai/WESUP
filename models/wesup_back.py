@@ -176,7 +176,7 @@ class WESUPConfig(BaseConfig):
 
     # Training configurations.
     batch_size = 1
-    epochs = 3
+    epochs = 10
 
 
 class WESUP(nn.Module):
@@ -321,7 +321,7 @@ class WESUPTrainer(BaseTrainer):
         Returns:
             trainer: a new WESUPTrainer instance
         """
-
+        print('wesup_back')
         config = WESUPConfig()
         if config.freeze_backbone:
             for param in model.backbone.parameters():
