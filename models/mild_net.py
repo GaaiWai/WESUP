@@ -101,7 +101,7 @@ class MILDNet(nn.Module):
 
     def __init__(self):
         super().__init__()
-
+        print('MILDNET')
         self.conv1_1 = nn.Conv2d(3, 64, 3, 1, 1)
         self.conv1_2 = nn.Conv2d(64, 64, 3, 1, 1)
         self.pool1 = nn.MaxPool2d(2, 2)
@@ -217,8 +217,10 @@ class MILDNetTrainer(BaseTrainer):
 
         kwargs = {**MILDNetConfig().to_dict(), **kwargs}
         super().__init__(model, **kwargs)
+        print('MILDNetTrainer_init')
 
     def get_default_dataset(self, root_dir, train=True, proportion=1.0):
+        print('MILDNetTrainer_1')
         if train:
             return SegmentationDataset(root_dir, target_size=self.kwargs.get('input_size'),
                                        contour=True, proportion=proportion)
@@ -227,12 +229,14 @@ class MILDNetTrainer(BaseTrainer):
                                    target_size=self.kwargs.get('input_size'))
 
     def get_default_optimizer(self):
+        print('MILDNetTrainer_2')
         optimizer = torch.optim.Adam(self.model.parameters(), lr=self.kwargs.get('initial_lr'),
                                      weight_decay=self.kwargs.get('weight_decay'))
 
         return optimizer, None
 
     def preprocess(self, *data):
+        print('MILDNetTrainer_3')
         data = [datum.to(self.device) for datum in data]
         if self.model.training:
             img, mask, cont = data
@@ -241,6 +245,7 @@ class MILDNetTrainer(BaseTrainer):
             return data
 
     def compute_loss(self, pred, target, metrics=None):
+        print('MILDNetTrainer_4')
         """Compute CWDS-MIL objective.
 
         Args:
@@ -276,6 +281,7 @@ class MILDNetTrainer(BaseTrainer):
         return obj_loss + cont_loss + decay * (aux_obj_loss + aux_cont_loss)
 
     def postprocess(self, pred, target=None):
+        print('MILDNetTrainer_5')
         obj, cont, _, _ = pred
         obj = obj.round().long()
         cont = (cont > self.kwargs.get('contour_threshold')).long()
@@ -291,4 +297,5 @@ class MILDNetTrainer(BaseTrainer):
         return pred
 
     def post_epoch_hook(self, epoch):
+        print('MILDNetTrainer_6')
         self.model.epoch = epoch
