@@ -22,22 +22,27 @@ def initialize_trainer(model_type, **kwargs):
     """
 
     if model_type == 'wesup':
+        print('wesup')
         kwargs = {**WESUPConfig().to_dict(), **kwargs}
         model = WESUP(**kwargs)
         trainer = WESUPTrainer(model, **kwargs)
     elif model_type == 'wesupv2':
+        print('wesup2')
         kwargs = {**WESUPV2Config().to_dict(), **kwargs}
         model = WESUPV2(**kwargs)
         trainer = WESUPV2Trainer(model, **kwargs)
     elif model_type == 'cdws':
+        print('cdws')
         kwargs = {**CDWSConfig().to_dict(), **kwargs}
         model = CDWS(**kwargs)
         trainer = CDWSTrainer(model, **kwargs)
     elif model_type == 'sizeloss':
+        print('sizeloss')
         kwargs = {**SizeLossConfig().to_dict(), **kwargs}
         model = SizeLoss(**kwargs)
         trainer = SizeLossTrainer(model, **kwargs)
     elif model_type == 'mild':
+        print('mild')
         kwargs = {**MILDNetConfig().to_dict(), **kwargs}
         model = MILDNet()
         trainer = MILDNetTrainer(model, **kwargs)
