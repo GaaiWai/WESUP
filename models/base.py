@@ -15,7 +15,7 @@ from utils.history import HistoryTracker
 
 class BaseConfig:
     """A base model configuration class."""
-
+    print('BaseConfig')
     # batch size for training
     batch_size = 1
 
