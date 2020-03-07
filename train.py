@@ -6,7 +6,7 @@ import logging
 from shutil import rmtree
 
 import fire
-
+print('train_basi')
 from models import initialize_trainer
 from utils.metrics import accuracy
 from utils.metrics import dice
